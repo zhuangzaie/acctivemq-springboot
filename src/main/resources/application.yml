@@ -1,0 +1,20 @@
+spring:
+  activemq:
+    broker-url: tcp://192.168.1.146:61616
+    user: admin
+    password: admin
+    broker-url-ssl: ssl://192.168.1.146:61617?socket.verifyHostName=false
+    #// 非failover的公共参数配置通过nested.*，例如 failover:(...)?nested.wireFormat.maxInactivityDuration=1000
+    #        // ?randomize=false 随机选择，默认是顺序
+    #        // 指定优先切换 failover:(tcp://host1:61616,tcp://host2:61616,tcp://host3:61616)?priorityBackup=true&priorityURIs=tcp://local1:61616,tcp://local2:61616
+    #        // maxReconnectDelay重连的最大间隔时间(毫秒)
+    broker-url-failover: failover:(tcp://192.168.1.147:61616,tcp://192.168.1.146:61616)?initialReconnectDelay=100
+    broker-url-durableSubscriber: tcp://192.168.1.146:61616?jms.clientID=x
+
+javax:
+  net:
+    ssl:
+      keyStore: client.ks
+      keyStorePassword: 123456
+      trustStore: client.ts
+      trustStorePassword: 123456
